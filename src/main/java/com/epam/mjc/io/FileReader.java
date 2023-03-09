@@ -13,16 +13,16 @@ public class FileReader {
         String email = "";
         long phone = 0L;
         try (FileInputStream fileInputStream = new FileInputStream(file.getPath())) {
-            String line = "";
+            StringBuilder line = new StringBuilder();
             while (true) {
                 int iByte = fileInputStream.read();
                 if (iByte != -1) {
-                    line += (char) iByte;
+                    line.append((char) iByte);
                 } else {
                     break;
                 }
             }
-            String[] value = line.split("\\R");
+            String[] value = line.toString().split("\\R");
             name = value[0].split(" ")[1];
             age = Integer.parseInt(value[1].split(" ")[1]);
             email = value[2].split(" ")[1];
