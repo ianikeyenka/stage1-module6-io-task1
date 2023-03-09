@@ -8,6 +8,10 @@ import java.io.IOException;
 public class FileReader {
 
     public Profile getDataFromFile(File file) {
+        String name = "";
+        int age = 0;
+        String email = "";
+        long phone = 0L;
         try (FileInputStream fileInputStream = new FileInputStream(file.getPath())) {
             String line = "";
             while (true) {
@@ -19,14 +23,14 @@ public class FileReader {
                 }
             }
             String[] value = line.split("\\R");
-            String name =  value[0].split(" ")[1];
-            Integer age =  Integer.parseInt(value[1].split(" ")[1]);
-            String email =  value[2].split(" ")[1];
-            Long phone =  Long.parseLong(value[3].split(" ")[1]);
-            return new Profile(name, age, email, phone);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            name = value[0].split(" ")[1];
+            age = Integer.parseInt(value[1].split(" ")[1]);
+            email = value[2].split(" ")[1];
+            phone = Long.parseLong(value[3].split(" ")[1]);
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new Profile(name, age, email, phone);
     }
 }
